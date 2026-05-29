@@ -852,6 +852,26 @@
       });
     }
 
+    async function getEntry(id) {
+      const db = await openDB();
+      return new Promise((res, rej) => {
+        const tx = db.transaction('entries', 'readonly');
+        const req = tx.objectStore('entries').get(id);
+        req.onsuccess = () => res(req.result);
+        req.onerror = e => rej(e.target.error);
+      });
+    }
+
+    async function updateEntry(entry) {
+      const db = await openDB();
+      return new Promise((res, rej) => {
+        const tx = db.transaction('entries', 'readwrite');
+        tx.objectStore('entries').put(entry);
+        tx.oncomplete = () => res();
+        tx.onerror = e => rej(e.target.error);
+      });
+    }
+
     async function getEntriesByDate(dateStr) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -1045,7 +1065,11 @@
     // Backward compat alias
     const randEmoji = foodEmoji;
 
-    const todayStr = () => new Date().toISOString().split('T')[0];
+    const dateInputValue = (date = new Date()) => {
+      const d = date instanceof Date ? date : new Date(date);
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    };
+    const todayStr = () => dateInputValue(new Date());
     const nowTime = () => {
       const d = new Date();
       return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
@@ -1053,6 +1077,13 @@
     function formatDate(d) {
       const dd = new Date(d);
       return `${dd.getFullYear()}年${dd.getMonth() + 1}月${dd.getDate()}日`;
+    }
+    function entryMeta(entry, showMeal = false) {
+      const parts = [];
+      if (showMeal) parts.push(`${MEAL_EMOJI[entry.mealType] || ''} ${MEAL_LABEL[entry.mealType] || entry.mealType}`.trim());
+      if (entry.amount) parts.push(entry.amount);
+      if (entry.notes) parts.push(entry.notes);
+      return parts.join(' · ');
     }
     function guessMealType() {
       const h = new Date().getHours();
@@ -1156,10 +1187,15 @@
     let selectedDate = todayStr();
     let historyViewDate = todayStr();
     let statsWeekOffset = 0;
+    let editingEntry = null;
 
     document.querySelectorAll('.nav-item').forEach(btn => {
       btn.addEventListener('click', () => {
         const page = btn.dataset.nav;
+        if (page === 'add') {
+          editingEntry = null;
+          selectedDate = todayStr();
+        }
         navigateTo(page);
       });
     });
@@ -1225,11 +1261,12 @@
           <span class="emoji-big">${e.emoji || foodEmoji(e.food)}</span>
           <div class="info">
             <div class="name">${e.food}</div>
-            <div class="meta">${e.time} · ${e.amount || ''}</div>
+            ${entryMeta(e) ? `<div class="meta">${entryMeta(e)}</div>` : ''}
           </div>
           ${e.photo ? `<img class="photo" src="${e.photo}" alt="">` : ''}
           <div class="cal">${e.calories} kcal</div>
-          <button onclick="removeEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.7rem;padding:4px;flex-shrink:0;" title="删除">🗑️</button>
+          <button onclick="editEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="编辑">✏️</button>
+          <button onclick="removeEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="删除">🗑️</button>
         </div>`;
           }
           html += '</div>';
@@ -1253,7 +1290,19 @@
       if (!confirm('确定要删除这条记录吗？(｡•́︿•̀｡)')) return;
       await deleteEntry(id);
       showToast('已删除~');
-      renderPage('today');
+      renderPage(currentPage);
+    }
+
+    async function editEntry(id) {
+      const entry = await getEntry(id);
+      if (!entry) {
+        showToast('这条记录找不到了~');
+        renderPage(currentPage);
+        return;
+      }
+      editingEntry = entry;
+      selectedDate = entry.date || todayStr();
+      navigateTo('add');
     }
 
     // ─────────────────────────────────────
@@ -1262,11 +1311,14 @@
     let pendingAnalysis = null; // LLM result awaiting user confirmation
 
     function renderAdd(main) {
-      document.getElementById('headerTitle').textContent = '🍽️ 记录美食';
-      document.getElementById('headerSub').textContent = '拍照自动识别，超方便~';
+      const entry = editingEntry;
+      const isEditing = !!entry;
+      selectedDate = (entry && entry.date) || selectedDate || todayStr();
+      document.getElementById('headerTitle').textContent = isEditing ? '✏️ 编辑美食' : '🍽️ 记录美食';
+      document.getElementById('headerSub').textContent = isEditing ? formatDate(selectedDate) : '拍照自动识别，也可以手动补记~';
       pendingAnalysis = null;
 
-      const defaultMeal = guessMealType();
+      const defaultMeal = (entry && entry.mealType) || guessMealType();
       const hasProxy = !!getApiProxyUrl();
 
       main.innerHTML = `
@@ -1293,10 +1345,17 @@
       </div>
 
       <div id="analyzeResult"></div>
+      <button class="btn btn-outline" type="button" style="margin-top:10px;" onclick="showManualForm()">
+        手动填写
+      </button>
     </div>
 
     <!-- Editable form (hidden until analysis done or manual entry) -->
-    <div class="card" id="foodForm" style="display:none;">
+    <div class="card" id="foodForm" style="display:${isEditing ? 'block' : 'none'};">
+      <div class="form-group">
+        <label>用餐日期</label>
+        <input type="date" id="entryDate" value="${selectedDate}" max="${todayStr()}">
+      </div>
       <div class="form-group">
         <label>食物名称</label>
         <input type="text" id="foodName" placeholder="比如：红烧牛肉面" autocomplete="off">
@@ -1318,7 +1377,7 @@
         <label>小备注</label>
         <textarea id="foodNotes" placeholder="味道怎么样？和谁一起吃的？(◕‿◕)" rows="2"></textarea>
       </div>
-      <button class="btn btn-primary" onclick="saveFood()">✨ 记录下来</button>
+      <button class="btn btn-primary" onclick="saveFood()">${isEditing ? '保存修改' : '✨ 记录下来'}</button>
     </div>`;
 
       // Render meal chips
@@ -1336,6 +1395,26 @@
       });
 
       document.getElementById('photoInput').addEventListener('change', onPhotoSelected);
+
+      if (isEditing) {
+        document.getElementById('foodName').value = entry.food || '';
+        document.getElementById('foodAmount').value = entry.amount || '';
+        document.getElementById('foodCalories').value = entry.calories || '';
+        document.getElementById('foodNotes').value = entry.notes || '';
+        document.getElementById('photoData').value = entry.photo || '';
+        if (entry.photo) {
+          const preview = document.getElementById('photoPreview');
+          preview.src = entry.photo;
+          preview.classList.add('has-photo');
+          document.getElementById('photoIcon').style.display = 'none';
+        }
+      }
+    }
+
+    function showManualForm() {
+      const form = document.getElementById('foodForm');
+      form.style.display = 'block';
+      form.scrollIntoView({ behavior: 'smooth' });
     }
 
     function onPhotoSelected(e) {
@@ -1416,14 +1495,17 @@
     async function saveFood() {
       const food = document.getElementById('foodName').value.trim();
       if (!food) { showToast('请输入食物名称哦~ (｡•́︿•̀｡)'); return; }
+      const entryDate = document.getElementById('entryDate').value || todayStr();
+      if (entryDate > todayStr()) { showToast('还不能记录未来的饭哦~'); return; }
 
       const calInput = parseInt(document.getElementById('foodCalories').value) || 0;
       let cal = calInput > 0 ? calInput : estimateCalories(food);
       if (!cal) cal = 200; // default
 
       const entry = {
-        date: todayStr(),
-        time: nowTime(),
+        ...(editingEntry || {}),
+        date: entryDate,
+        time: editingEntry ? editingEntry.time : nowTime(),
         mealType: document.getElementById('mealType').value,
         food: food,
         amount: document.getElementById('foodAmount').value.trim(),
@@ -1432,10 +1514,24 @@
         notes: document.getElementById('foodNotes').value.trim(),
         emoji: foodEmoji(food),
       };
+      if (editingEntry) entry.updatedAt = new Date().toISOString();
 
-      await addEntry(entry);
-      showToast('记录好啦！(๑´ڡ`๑) ♡');
-      navigateTo('today');
+      if (editingEntry) {
+        await updateEntry(entry);
+        showToast('修改保存好啦~');
+      } else {
+        await addEntry(entry);
+        showToast('记录好啦！(๑´ڡ`๑) ♡');
+      }
+
+      editingEntry = null;
+      selectedDate = entryDate;
+      if (entryDate === todayStr()) {
+        navigateTo('today');
+      } else {
+        historyViewDate = entryDate;
+        navigateTo('calendar');
+      }
     }
 
     // ─────────────────────────────────────
@@ -1445,9 +1541,9 @@
       document.getElementById('headerTitle').textContent = '📅 饮食日历';
       document.getElementById('headerSub').textContent = formatDate(historyViewDate);
 
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = now.getMonth();
+      const viewDate = new Date(`${historyViewDate}T00:00:00`);
+      const year = viewDate.getFullYear();
+      const month = viewDate.getMonth();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       const firstDow = new Date(year, month, 1).getDay();
       const today = todayStr();
@@ -1462,7 +1558,11 @@
       <img src="assets/calendar_plan.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
     </div>
     <div class="card">
-    <div style="text-align:center;font-weight:700;margin-bottom:10px;">${year}年${month + 1}月</div>
+    <div class="week-nav">
+      <button class="arrow" onclick="changeCalendarMonth(-1)">‹</button>
+      <div class="week-title">${year}年${month + 1}月</div>
+      <button class="arrow" onclick="changeCalendarMonth(1)">›</button>
+    </div>
     <div class="calendar-mini">`;
 
       for (const dl of dayLabels) html += `<div class="day-label">${dl}</div>`;
@@ -1492,10 +1592,12 @@
         <span class="emoji-big">${e.emoji || foodEmoji(e.food)}</span>
         <div class="info">
           <div class="name">${e.food}</div>
-          <div class="meta">${e.time} · ${MEAL_EMOJI[e.mealType] || ''} ${MEAL_LABEL[e.mealType] || e.mealType} · ${e.amount || ''}</div>
+          ${entryMeta(e, true) ? `<div class="meta">${entryMeta(e, true)}</div>` : ''}
         </div>
         ${e.photo ? `<img class="photo" src="${e.photo}" alt="">` : ''}
         <div class="cal">${e.calories} kcal</div>
+        <button onclick="editEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="编辑">✏️</button>
+        <button onclick="removeEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="删除">🗑️</button>
       </div>`;
         }
         html += `<div style="text-align:center;padding:8px;color:var(--text-dim);font-size:0.8rem;">✨ 当日估算总计：${dayCal} kcal</div>`;
@@ -1506,6 +1608,13 @@
 
     async function selectCalendarDate(ds) {
       historyViewDate = ds;
+      await renderCalendar(document.getElementById('mainContent'));
+    }
+
+    async function changeCalendarMonth(offset) {
+      const d = new Date(`${historyViewDate}T00:00:00`);
+      d.setMonth(d.getMonth() + offset, 1);
+      historyViewDate = dateInputValue(d);
       await renderCalendar(document.getElementById('mainContent'));
     }
 
