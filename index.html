@@ -817,6 +817,14 @@
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-sheet">
       <h3>⚙️ 设置</h3>
+            <div class="form-group">
+        <label>🎯 每日目标热量 (kcal)</label>
+        <input type="number" id="targetCalInput" placeholder="例如 1600" min="500" autocomplete="off">
+        <div style="margin-top:6px;font-size:0.72rem;color:var(--text-dim);">设置你每日计划摄入的总热量</div>
+        <div id="targetCalStatus" style="margin-top:6px;"></div>
+      </div>
+      <hr style="margin:14px 0;border:0;border-top:1px solid #F0E0D8;">
+
       <div class="form-group">
         <label>AI 代理地址</label>
         <input type="url" id="apiProxyInput" placeholder="https://your-worker.workers.dev/analyze" autocomplete="off">
@@ -1288,6 +1296,9 @@
         html += `<div style="text-align:center;margin-bottom:12px;">
       <img src="assets/hero_banner.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
     </div>`;
+          html += `<div class="card" id="targetCalCard">
+          <div id="targetCalSummary">加载目标热量...</div>
+        </div>`;
         html += `<div class="summary-bar">
       <div class="stat"><div class="num">${entries.length}</div><div class="label">今天餐次</div></div>
       <div class="stat"><div class="num">${totalCal}</div><div class="label">估算热量/kcal</div></div>
@@ -1807,6 +1818,92 @@
       }
       renderPage('today');
     })();
+    // ====================== 新增：每日目标热量模块 ======================
+const TARGET_CAL_LOCAL_KEY = "foodDiaryTargetCal";
+
+// 获取保存的目标热量
+function getTargetCal() {
+  const saved = localStorage.getItem(TARGET_CAL_LOCAL_KEY);
+  const num = Number(saved);
+  return Number.isFinite(num) && num >= 500 ? num : 1800;
+}
+// 保存目标热量
+function saveTargetCal() {
+  const inputEl = document.getElementById("targetCalInput");
+  const val = Number(inputEl.value.trim());
+  const statusEl = document.getElementById("targetCalStatus");
+  if (!Number.isFinite(val) || val < 500) {
+    statusEl.innerHTML = `<span class="api-badge unset">⚠️ 目标热量不能小于500kcal</span>`;
+    return;
+  }
+  localStorage.setItem(TARGET_CAL_LOCAL_KEY, String(val));
+  statusEl.innerHTML = `<span class="api-badge set">✅ 目标已保存</span>`;
+  showToast("🎯 每日目标热量已保存");
+  renderTargetCalSummary();
+}
+
+// 计算今日总热量
+async function getTodayTotalCal() {
+  const todayEntries = await getEntriesByDate(todayStr());
+  return todayEntries.reduce((sum, item) => sum + (Number(item.calories) || 0), 0);
+}
+
+// 渲染目标热量提示卡片
+async function renderTargetCalSummary() {
+  const todayTotal = await getTodayTotalCal();
+  const target = getTargetCal();
+  const diff = todayTotal - target;
+  let tipText, tipColor;
+  if (diff < -100) {
+    tipText = `✅ 今日已摄入 ${todayTotal} kcal｜目标 ${target} kcal，还可以再吃 ${Math.abs(diff)} kcal`;
+    tipColor = "#4A8A5E";
+  } else if (diff <= 100) {
+    tipText = `🟢 今日已摄入 ${todayTotal} kcal｜目标 ${target} kcal，热量接近目标！`;
+    tipColor = "#8B7565";
+  } else {
+    tipText = `🔴 今日已摄入 ${todayTotal} kcal｜目标 ${target} kcal，超出目标 ${diff} kcal！`;
+    tipColor = "#C87050";
+  }
+  const el = document.getElementById("targetCalSummary");
+  if (el) {
+    el.style.color = tipColor;
+    el.style.fontWeight = "700";
+    el.style.fontSize = "0.95rem";
+    el.innerText = tipText;
+  }
+}
+
+// 修改openSettings函数，打开设置弹窗时自动填充已保存的目标热量
+const oldOpenSettings = openSettings;
+openSettings = function(){
+  oldOpenSettings();
+  const input = document.getElementById("targetCalInput");
+  if(input) input.value = getTargetCal();
+  const statusEl = document.getElementById("targetCalStatus");
+  statusEl.innerHTML = `<span class="api-badge set">当前目标：${getTargetCal()} kcal</span>`;
+}
+
+// 保存设置的按钮，增加保存目标热量的调用
+const oldSaveApiProxyUrl = saveApiProxyUrl;
+saveApiProxyUrl = function(){
+  saveTargetCal(); // 一并保存目标热量
+  oldSaveApiProxyUrl();
+}
+
+// 删除记录后刷新热量提示
+const oldRemoveEntry = removeEntry;
+removeEntry = async function(id){
+  await oldRemoveEntry(id);
+  renderTargetCalSummary();
+}
+
+// 保存食物记录后刷新热量提示
+const oldSaveFood = saveFood;
+saveFood = async function(){
+  await oldSaveFood();
+  renderTargetCalSummary();
+}
+
   </script>
 </body>
 
