@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -10,7 +9,6 @@
   <meta name="apple-mobile-web-app-title" content="饮食日记">
   <meta name="theme-color" content="#FFD1DC">
   <link rel="manifest" href="data:application/json,{}">
-
   <style>
     :root {
       --peach: #FFD8C8;
@@ -38,19 +36,16 @@
       --yellow: var(--golden);
       --yellow-deep: var(--golden-deep);
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     html {
       font-size: 16px;
       height: 100%;
       overflow: hidden;
     }
-
     body {
       font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
       background: var(--bg);
@@ -63,7 +58,6 @@
       user-select: none;
       -webkit-user-select: none;
     }
-
     /* Header */
     header {
       background: linear-gradient(135deg, var(--pink), var(--purple));
@@ -74,20 +68,17 @@
       position: relative;
       z-index: 10;
     }
-
     header h1 {
       font-size: 1.35rem;
       color: #fff;
       font-weight: 700;
       letter-spacing: 1px;
     }
-
     header .sub {
       font-size: 0.75rem;
       color: rgba(255, 255, 255, 0.8);
       margin-top: 2px;
     }
-
     /* Main content */
     main {
       flex: 1;
@@ -96,11 +87,9 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
     }
-
     main::-webkit-scrollbar {
       display: none;
     }
-
     /* Bottom Nav */
     nav {
       display: flex;
@@ -112,7 +101,6 @@
       flex-shrink: 0;
       box-shadow: 0 -2px 12px rgba(200, 160, 140, 0.1);
     }
-
     nav .nav-item {
       display: flex;
       flex-direction: column;
@@ -128,17 +116,14 @@
       background: none;
       font-family: inherit;
     }
-
     nav .nav-item .icon {
       font-size: 1.5rem;
       line-height: 1;
     }
-
     nav .nav-item.active {
       color: var(--pink-deep);
       background: rgba(248, 152, 112, 0.18);
     }
-
     /* Cards */
     .card {
       background: var(--card);
@@ -148,19 +133,16 @@
       margin-bottom: 12px;
       animation: cardIn 0.35s ease-out;
     }
-
     @keyframes cardIn {
       from {
         opacity: 0;
         transform: translateY(12px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-
     .meal-header {
       display: flex;
       align-items: center;
@@ -169,7 +151,6 @@
       font-weight: 700;
       font-size: 0.95rem;
     }
-
     /* Food entry row */
     .food-row {
       display: flex;
@@ -180,34 +161,28 @@
       border-radius: var(--radius-sm);
       margin-bottom: 8px;
     }
-
     .food-row .emoji-big {
       font-size: 2rem;
       flex-shrink: 0;
     }
-
     .food-row .info {
       flex: 1;
       min-width: 0;
     }
-
     .food-row .name {
       font-weight: 600;
       font-size: 0.9rem;
     }
-
     .food-row .meta {
       font-size: 0.72rem;
       color: var(--text-dim);
     }
-
     .food-row .cal {
       font-weight: 700;
       color: var(--pink-deep);
       font-size: 0.85rem;
       white-space: nowrap;
     }
-
     .food-row .photo {
       width: 48px;
       height: 48px;
@@ -215,7 +190,6 @@
       object-fit: cover;
       flex-shrink: 0;
     }
-
     /* Summary bar */
     .summary-bar {
       display: flex;
@@ -227,40 +201,33 @@
       margin-bottom: 16px;
       box-shadow: var(--shadow);
     }
-
     .summary-bar .stat {
       text-align: center;
     }
-
     .summary-bar .num {
       font-size: 1.5rem;
       font-weight: 800;
       color: #E89050;
     }
-
     .summary-bar .label {
       font-size: 0.7rem;
       color: var(--text-dim);
     }
-
     /* Empty state */
     .empty-state {
       text-align: center;
       padding: 40px 20px;
       color: var(--text-dim);
     }
-
     .empty-state .big-emoji {
       font-size: 4rem;
       display: block;
       margin-bottom: 12px;
     }
-
     /* Form */
     .form-group {
       margin-bottom: 14px;
     }
-
     .form-group label {
       display: block;
       font-weight: 600;
@@ -268,7 +235,6 @@
       margin-bottom: 4px;
       color: #8B7565;
     }
-
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -283,19 +249,16 @@
       outline: none;
       transition: 0.2s;
     }
-
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: var(--pink-deep);
       background: #fff;
     }
-
     .form-group textarea {
       resize: vertical;
       min-height: 60px;
     }
-
     /* Buttons */
     .btn {
       display: inline-flex;
@@ -312,31 +275,26 @@
       font-family: inherit;
       letter-spacing: 0.5px;
     }
-
     .btn:active {
       transform: scale(0.96);
     }
-
     .btn-primary {
       background: linear-gradient(135deg, #F89870, #F08060);
       color: #fff;
       width: 100%;
       box-shadow: 0 4px 16px rgba(248, 152, 112, 0.35);
     }
-
     .btn-outline {
       background: #fff;
       color: var(--pink-deep);
       border: 2px solid var(--pink);
       width: 100%;
     }
-
     .btn-small {
       padding: 6px 14px;
       font-size: 0.75rem;
       border-radius: 16px;
     }
-
     /* Photo preview */
     .photo-preview {
       width: 100%;
@@ -346,11 +304,9 @@
       margin-top: 8px;
       display: none;
     }
-
     .photo-preview.has-photo {
       display: block;
     }
-
     /* Calorie estimate badge */
     .cal-badge {
       display: inline-flex;
@@ -363,14 +319,12 @@
       font-weight: 600;
       color: #D89040;
     }
-
     /* Meal type chips */
     .meal-chips {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .meal-chip {
       padding: 8px 16px;
       border-radius: 20px;
@@ -382,12 +336,10 @@
       font-family: inherit;
       color: var(--text);
     }
-
     .meal-chip.selected {
       border-color: var(--pink-deep);
       background: var(--pink);
     }
-
     /* Calendar mini */
     .calendar-mini {
       display: grid;
@@ -395,13 +347,11 @@
       gap: 6px;
       text-align: center;
     }
-
     .calendar-mini .day-label {
       font-size: 0.7rem;
       color: var(--text-dim);
       padding: 4px 0;
     }
-
     .calendar-mini .day-cell {
       aspect-ratio: 1;
       display: flex;
@@ -412,26 +362,21 @@
       cursor: pointer;
       transition: 0.15s;
     }
-
     .calendar-mini .day-cell:hover {
       background: var(--pink);
     }
-
     .calendar-mini .day-cell.has-record {
       background: var(--pink);
       font-weight: 700;
       color: var(--pink-deep);
     }
-
     .calendar-mini .day-cell.today {
       border: 2px solid var(--pink-deep);
     }
-
     .calendar-mini .day-cell.selected {
       background: var(--pink-deep);
       color: #fff;
     }
-
     /* Week selector */
     .week-nav {
       display: flex;
@@ -439,12 +384,10 @@
       justify-content: space-between;
       margin-bottom: 12px;
     }
-
     .week-nav .week-title {
       font-weight: 700;
       font-size: 0.95rem;
     }
-
     .week-nav .arrow {
       font-size: 1.2rem;
       padding: 6px 12px;
@@ -453,7 +396,6 @@
       background: none;
       color: var(--text);
     }
-
     /* Stats cards */
     .stat-cards {
       display: grid;
@@ -461,7 +403,6 @@
       gap: 10px;
       margin-bottom: 12px;
     }
-
     .stat-card {
       background: var(--card);
       border-radius: var(--radius);
@@ -469,46 +410,37 @@
       text-align: center;
       box-shadow: var(--shadow);
     }
-
     .stat-card .big {
       font-size: 1.8rem;
       font-weight: 800;
     }
-
     .stat-card .lbl {
       font-size: 0.72rem;
       color: var(--text-dim);
       margin-top: 2px;
     }
-
     .stat-card.pink {
       background: linear-gradient(135deg, #FFF2ED, #FFECE4);
     }
-
     .stat-card.purple {
       background: linear-gradient(135deg, #FFF5ED, #FFF0E4);
     }
-
     .stat-card.mint {
       background: linear-gradient(135deg, #F0FFF8, #E8FFF0);
     }
-
     .stat-card.yellow {
       background: linear-gradient(135deg, #FFFEF0, #FFF8E8);
     }
-
     .export-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-
     .export-actions .btn {
       width: 100%;
       padding-left: 12px;
       padding-right: 12px;
     }
-
     /* Top foods */
     .top-food {
       display: flex;
@@ -516,7 +448,6 @@
       gap: 10px;
       padding: 10px 0;
     }
-
     .top-food .rank {
       width: 28px;
       height: 28px;
@@ -527,19 +458,15 @@
       font-weight: 800;
       font-size: 0.8rem;
     }
-
     .top-food .rank.gold {
       background: #FFE082;
     }
-
     .top-food .rank.silver {
       background: #E0E0E0;
     }
-
     .top-food .rank.bronze {
       background: #FFCC80;
     }
-
     .top-food .bar-wrap {
       flex: 1;
       height: 20px;
@@ -547,7 +474,6 @@
       border-radius: 10px;
       overflow: hidden;
     }
-
     .top-food .bar-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--pink-deep), var(--purple-deep));
@@ -561,7 +487,6 @@
       color: #fff;
       font-weight: 600;
     }
-
     /* Toast */
     .toast {
       position: fixed;
@@ -578,20 +503,16 @@
       transition: opacity 0.3s;
       pointer-events: none;
     }
-
     .toast.show {
       opacity: 1;
     }
-
     /* Page containers */
     .page {
       display: none;
     }
-
     .page.active {
       display: block;
     }
-
     /* Back button */
     .back-btn {
       position: absolute;
@@ -610,7 +531,6 @@
       align-items: center;
       justify-content: center;
     }
-
     /* Date header */
     .date-header {
       display: flex;
@@ -619,12 +539,10 @@
       gap: 12px;
       margin-bottom: 14px;
     }
-
     .date-header .date-text {
       font-weight: 700;
       font-size: 0.95rem;
     }
-
     .date-header button {
       background: none;
       border: none;
@@ -633,7 +551,6 @@
       color: var(--text);
       padding: 4px 8px;
     }
-
     /* Settings gear */
     .settings-gear {
       position: absolute;
@@ -653,11 +570,9 @@
       justify-content: center;
       transition: 0.2s;
     }
-
     .settings-gear:active {
       transform: translateY(-50%) scale(0.9);
     }
-
     /* Modal overlay */
     .modal-overlay {
       position: fixed;
@@ -673,11 +588,9 @@
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
     }
-
     .modal-overlay.show {
       display: flex;
     }
-
     .modal-sheet {
       background: var(--card);
       border-radius: 24px 24px 0 0;
@@ -687,27 +600,22 @@
       animation: slideUp 0.3s ease-out;
       box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
     }
-
     @keyframes slideUp {
       from {
         transform: translateY(100%);
       }
-
       to {
         transform: translateY(0);
       }
     }
-
     .modal-sheet h3 {
       font-size: 1rem;
       margin-bottom: 16px;
       text-align: center;
     }
-
     .modal-sheet .form-group label {
       font-size: 0.78rem;
     }
-
     /* Analyze button */
     .btn-analyze {
       background: linear-gradient(135deg, #A78BFA, #C084FC);
@@ -716,13 +624,11 @@
       margin-top: 8px;
       box-shadow: 0 4px 16px rgba(167, 139, 250, 0.35);
     }
-
     .btn-analyze:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
-
     /* Loading spinner */
     .spinner {
       display: inline-block;
@@ -733,13 +639,11 @@
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
-
     @keyframes spin {
       to {
         transform: rotate(360deg);
       }
     }
-
     /* Result card */
     .result-card {
       background: linear-gradient(135deg, #F5FFF8, #FFF8F0);
@@ -749,19 +653,16 @@
       margin: 12px 0;
       animation: cardIn 0.35s ease-out;
     }
-
     .result-card .food-name {
       font-size: 1.1rem;
       font-weight: 700;
       color: #5D8A6E;
     }
-
     .result-card .detail {
       font-size: 0.8rem;
       color: #8B9B8B;
       margin-top: 4px;
     }
-
     /* API status badge */
     .api-badge {
       display: inline-flex;
@@ -772,21 +673,17 @@
       font-size: 0.7rem;
       font-weight: 600;
     }
-
     .api-badge.set {
       background: #D4F5E0;
       color: #4A8A5E;
     }
-
     .api-badge.unset {
       background: #FFE8E0;
       color: #C87050;
     }
   </style>
 </head>
-
 <body>
-
   <header>
     <div style="position:relative;">
       <h1 id="headerTitle">(｡•ᴗ-)✧ 饮食日记</h1>
@@ -794,9 +691,7 @@
       <button class="settings-gear" onclick="openSettings()" title="设置">⚙️</button>
     </div>
   </header>
-
   <main id="mainContent"></main>
-
   <nav>
     <button class="nav-item active" data-nav="today">
       <span class="icon">📔</span> 今日
@@ -811,9 +706,7 @@
       <span class="icon">📊</span> 周报
     </button>
   </nav>
-
   <div class="toast" id="toast"></div>
-
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-sheet">
       <h3>⚙️ 设置</h3>
@@ -824,7 +717,6 @@
         <div id="targetCalStatus" style="margin-top:6px;"></div>
       </div>
       <hr style="margin:14px 0;border:0;border-top:1px solid #F0E0D8;">
-
       <div class="form-group">
         <label>AI 代理地址</label>
         <input type="url" id="apiProxyInput" placeholder="https://your-worker.workers.dev/analyze" autocomplete="off">
@@ -840,7 +732,6 @@
       </div>
     </div>
   </div>
-
   <script>
     // ─────────────────────────────────────
     // IndexedDB
@@ -861,7 +752,6 @@
         req.onerror = e => reject(e.target.error);
       });
     }
-
     async function addEntry(entry) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -871,7 +761,6 @@
         tx.onerror = e => rej(e.target.error);
       });
     }
-
     async function getEntry(id) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -881,7 +770,6 @@
         req.onerror = e => rej(e.target.error);
       });
     }
-
     async function updateEntry(entry) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -891,7 +779,6 @@
         tx.onerror = e => rej(e.target.error);
       });
     }
-
     async function getEntriesByDate(dateStr) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -902,7 +789,6 @@
         req.onerror = e => rej(e.target.error);
       });
     }
-
     async function getAllDates() {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -915,7 +801,6 @@
         req.onerror = e => rej(e.target.error);
       });
     }
-
     async function getAllEntries() {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -925,7 +810,6 @@
         req.onerror = e => rej(e.target.error);
       });
     }
-
     async function getRangeEntries(start, end) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -937,7 +821,6 @@
         req.onerror = e => rej(e.target.error);
       });
     }
-
     async function deleteEntry(id) {
       const db = await openDB();
       return new Promise((res, rej) => {
@@ -947,7 +830,6 @@
         tx.onerror = e => rej(e.target.error);
       });
     }
-
     // ─────────────────────────────────────
     // Nutrition Estimator
     // ─────────────────────────────────────
@@ -971,7 +853,6 @@
       }
       return best ? best[1] : null;
     }
-
     // ─────────────────────────────────────
     // Helpers
     // ─────────────────────────────────────
@@ -984,7 +865,6 @@
     ];
     const MEAL_EMOJI = Object.fromEntries(MEAL_TYPES.map(m => [m.key, m.emoji]));
     const MEAL_LABEL = Object.fromEntries(MEAL_TYPES.map(m => [m.key, m.label]));
-
     const FOOD_EMOJI_MAP = [
       // 主食
       [['米饭', '炒饭', '盖饭', '拌饭', '饭团', '便当', '盒饭', '饭'], '🍚'],
@@ -1077,7 +957,6 @@
       [['螺蛳粉', '酸辣粉', '米线'], '🍜'],
       [['便当', '套餐', '盒饭'], '🍱'],
     ];
-
     function foodEmoji(food) {
       if (!food) return '🍽️';
       for (const [keywords, emoji] of FOOD_EMOJI_MAP) {
@@ -1091,10 +970,8 @@
       for (let i = 0; i < food.length; i++) hash = ((hash << 5) - hash) + food.charCodeAt(i);
       return POOL[Math.abs(hash) % POOL.length];
     }
-
     // Backward compat alias
     const randEmoji = foodEmoji;
-
     const dateInputValue = (date = new Date()) => {
       const d = date instanceof Date ? date : new Date(date);
       return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -1142,13 +1019,11 @@
       if (h < 10) return 'breakfast'; if (h < 13) return 'lunch';
       if (h < 17) return 'snack'; if (h < 21) return 'dinner'; return 'supper';
     }
-
     function showToast(msg, time = 2000) {
       const t = document.getElementById('toast');
       t.textContent = msg; t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), time);
     }
-
     // ─────────────────────────────────────
     // Settings & AI Proxy
     // ─────────────────────────────────────
@@ -1163,7 +1038,6 @@
         return url;
       }
     }
-
     function openSettings() {
       document.getElementById('apiProxyInput').value = getApiProxyUrl();
       updateApiProxyStatus();
@@ -1189,14 +1063,12 @@
     document.getElementById('settingsModal').addEventListener('click', function (e) {
       if (e.target === this) closeSettings();
     });
-
     // ─────────────────────────────────────
     // OpenAI Food Recognition
     // ─────────────────────────────────────
     async function analyzeFoodPhoto(imageBase64) {
       const proxyUrl = getApiProxyUrl();
       if (!proxyUrl) { showToast('请先在设置里填写 AI 代理地址哦~ ⚙️'); return null; }
-
       try {
         const resp = await fetch(proxyUrl, {
           method: 'POST',
@@ -1207,14 +1079,12 @@
             image: imageBase64
           })
         });
-
         if (!resp.ok) {
           const err = await resp.text();
           console.error('AI proxy error:', err);
           showToast('识别失败，检查 AI 代理地址或服务配置~ (｡•́︿•̀｡)');
           return null;
         }
-
         const result = await resp.json();
         // Validate
         if (!result.food) { showToast('未能识别食物，请重新拍照~'); return null; }
@@ -1231,7 +1101,6 @@
         return null;
       }
     }
-
     // ─────────────────────────────────────
     // Navigation
     // ─────────────────────────────────────
@@ -1240,7 +1109,6 @@
     let historyViewDate = todayStr();
     let statsWeekOffset = 0;
     let editingEntry = null;
-
     document.querySelectorAll('.nav-item').forEach(btn => {
       btn.addEventListener('click', () => {
         const page = btn.dataset.nav;
@@ -1251,14 +1119,12 @@
         navigateTo(page);
       });
     });
-
     function navigateTo(page) {
       currentPage = page;
       document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
       document.querySelector(`[data-nav="${page}"]`).classList.add('active');
       renderPage(page);
     }
-
     function renderPage(page) {
       const main = document.getElementById('mainContent');
       switch (page) {
@@ -1268,50 +1134,47 @@
         case 'stats': renderStats(main); break;
       }
     }
-
     // ─────────────────────────────────────
-    // Today Page
-    // ─────────────────────────────────────
-    async function renderToday(main) {
-      document.getElementById('headerTitle').textContent = '(｡•ᴗ-)✧ 饮食日记';
-      document.getElementById('headerSub').textContent = formatDate(todayStr());
-
-      const entries = await getEntriesByDate(todayStr());
-      const grouped = {}; let totalCal = 0;
-      for (const e of entries) {
-        grouped[e.mealType] = grouped[e.mealType] || [];
-        grouped[e.mealType].push(e);
-        totalCal += e.calories || 0;
-      }
-
-      let html = '';
-      if (entries.length === 0) {
-        html = `
-      <div class="empty-state">
-        <img src="assets/empty_state.png" alt="今天吃什么？" class="mascot-img" style="width:180px;height:180px;border-radius:16px;object-fit:cover;margin-bottom:12px;">
-        <p>今天还没有记录哦~</p>
-        <p style="font-size:0.8rem;margin-top:4px;">点击下方「记录」开始吧 (๑•̀ㅂ•́)و✧</p>
-      </div>`;
-      } else {
-        html += `<div style="text-align:center;margin-bottom:12px;">
+// Today Page
+// ─────────────────────────────────────
+async function renderToday(main) {
+  document.getElementById('headerTitle').textContent = '(｡•ᴗ-)✧ 饮食日记';
+  document.getElementById('headerSub').textContent = formatDate(todayStr());
+  const entries = await getEntriesByDate(todayStr());
+  const grouped = {};
+  let totalCal = 0;
+  for (const e of entries) {
+    grouped[e.mealType] = grouped[e.mealType] || [];
+    grouped[e.mealType].push(e);
+    totalCal += e.calories || 0;
+  }
+  let html = '';
+  if (entries.length === 0) {
+    html = `
+    <div class="empty-state">
+      <img src="assets/empty_state.png" alt="今天吃什么？" class="mascot-img" style="width:180px;height:180px;border-radius:16px;object-fit:cover;margin-bottom:12px;">
+      <p>今天还没有记录哦~</p>
+      <p style="font-size:0.8rem;margin-top:4px;">点击下方「记录」开始吧 (๑•̀ㅂ•́)و✧</p>
+    </div>`;
+  } else {
+    html += `<div style="text-align:center;margin-bottom:12px;">
       <img src="assets/hero_banner.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
     </div>`;
-          html += `<div class="card" id="targetCalCard">
-          <div id="targetCalSummary">加载目标热量...</div>
-        </div>`;
-        html += `<div class="summary-bar">
+    html += `<div class="card" id="targetCalCard">
+      <div id="targetCalSummary">加载目标热量...</div>
+    </div>`;
+    html += `<div class="summary-bar">
       <div class="stat"><div class="num">${entries.length}</div><div class="label">今天餐次</div></div>
       <div class="stat"><div class="num">${totalCal}</div><div class="label">估算热量/kcal</div></div>
       <div class="stat"><div class="num" style="font-size:1.1rem;line-height:1.4;">${getFoodEmojis(entries)}</div><div class="label">今日美食</div></div>
     </div>`;
-
-        const mealOrder = ['breakfast', 'lunch', 'snack', 'dinner', 'supper'];
-        for (const mt of mealOrder) {
-          if (!grouped[mt]) continue;
-          html += `<div class="card">
+    const mealOrder = ['breakfast', 'lunch', 'snack', 'dinner', 'supper'];
+    for (const mt of mealOrder) {
+      if (!grouped[mt]) continue;
+      html += `<div class="card">
         <div class="meal-header">${MEAL_EMOJI[mt]} ${MEAL_LABEL[mt]} · ${grouped[mt].length} 项</div>`;
-          for (const e of grouped[mt]) {
-            html += `
+      for (const e of grouped[mt]) {
+        html += `
         <div class="food-row">
           <span class="emoji-big">${e.emoji || foodEmoji(e.food)}</span>
           <div class="info">
@@ -1323,326 +1186,311 @@
           <button onclick="editEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="编辑">✏️</button>
           <button onclick="removeEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="删除">🗑️</button>
         </div>`;
-          }
-          html += '</div>';
-        }
       }
-      main.innerHTML = html;
+      html += '</div>';
     }
+  }
+  main.innerHTML = html;
+}
 
-    function getFoodEmojis(entries) {
-      const emojis = [];
-      const seen = new Set();
-      for (const e of entries) {
-        const em = e.emoji || foodEmoji(e.food);
-        if (!seen.has(em)) { seen.add(em); emojis.push(em); }
-        if (emojis.length >= 5) break;
-      }
-      return emojis.join('') || '🍽️';
+function getFoodEmojis(entries) {
+  const emojis = [];
+  const seen = new Set();
+  for (const e of entries) {
+    const em = e.emoji || foodEmoji(e.food);
+    if (!seen.has(em)) {
+      seen.add(em);
+      emojis.push(em);
     }
+    if (emojis.length >= 5) break;
+  }
+  return emojis.join('') || '🍽️';
+}
 
-    async function removeEntry(id) {
-      if (!confirm('确定要删除这条记录吗？(｡•́︿•̀｡)')) return;
-      await deleteEntry(id);
-      showToast('已删除~');
-      renderPage(currentPage);
-    }
+async function removeEntry(id) {
+  if (!confirm('确定要删除这条记录吗？(｡•́︿•̀｡)')) return;
+  await deleteEntry(id);
+  showToast('已删除~');
+  renderPage(currentPage);
+}
 
-    async function editEntry(id) {
-      const entry = await getEntry(id);
-      if (!entry) {
-        showToast('这条记录找不到了~');
-        renderPage(currentPage);
-        return;
-      }
-      editingEntry = entry;
-      selectedDate = entry.date || todayStr();
-      navigateTo('add');
-    }
+async function editEntry(id) {
+  const entry = await getEntry(id);
+  if (!entry) {
+    showToast('这条记录找不到了~');
+    renderPage(currentPage);
+    return;
+  }
+  editingEntry = entry;
+  selectedDate = entry.date || todayStr();
+  navigateTo('add');
+}
 
-    // ─────────────────────────────────────
-    // Add Page (Photo-first)
-    // ─────────────────────────────────────
-    let pendingAnalysis = null; // LLM result awaiting user confirmation
-
-    function renderAdd(main) {
-      const entry = editingEntry;
-      const isEditing = !!entry;
-      selectedDate = (entry && entry.date) || selectedDate || todayStr();
-      document.getElementById('headerTitle').textContent = isEditing ? '✏️ 编辑美食' : '🍽️ 记录美食';
-      document.getElementById('headerSub').textContent = isEditing ? formatDate(selectedDate) : '拍照自动识别，也可以手动补记~';
-      pendingAnalysis = null;
-
-      const defaultMeal = (entry && entry.mealType) || guessMealType();
-      const hasProxy = !!getApiProxyUrl();
-
-      main.innerHTML = `
-    <div style="text-align:center;margin-bottom:12px;">
-      <img src="assets/record_food.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
-    </div>
-    <!-- Photo capture area -->
-    <div class="card" style="text-align:center;">
-      <div style="font-size:3rem;margin-bottom:8px;" id="photoIcon">📸</div>
-      <div style="font-weight:700;margin-bottom:4px;">拍下你的美食吧</div>
-      <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:12px;">AI 会自动识别食物和热量~</div>
-      <input type="file" id="photoInput" accept="image/*" style="display:none;">
-      <button class="btn btn-outline" type="button" onclick="document.getElementById('photoInput').click()">
-        📷 拍照或选择图片
+// ─────────────────────────────────────
+// Add Page (Photo-first)
+// ─────────────────────────────────────
+let pendingAnalysis = null; // LLM result awaiting user confirmation
+function renderAdd(main) {
+  const entry = editingEntry;
+  const isEditing = !!entry;
+  selectedDate = (entry && entry.date) || selectedDate || todayStr();
+  document.getElementById('headerTitle').textContent = isEditing ? '✏️ 编辑美食' : '🍽️ 记录美食';
+  document.getElementById('headerSub').textContent = isEditing ? formatDate(selectedDate) : '拍照自动识别，也可以手动补记~';
+  pendingAnalysis = null;
+  const defaultMeal = (entry && entry.mealType) || guessMealType();
+  const hasProxy = !!getApiProxyUrl();
+  main.innerHTML = `
+  <div style="text-align:center;margin-bottom:12px;">
+    <img src="assets/record_food.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
+  </div>
+  <!-- Photo capture area -->
+  <div class="card" style="text-align:center;">
+    <div style="font-size:3rem;margin-bottom:8px;" id="photoIcon">📸</div>
+    <div style="font-weight:700;margin-bottom:4px;">拍下你的美食吧</div>
+    <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:12px;">AI 会自动识别食物和热量~</div>
+    <input type="file" id="photoInput" accept="image/*" style="display:none;">
+    <button class="btn btn-outline" type="button" onclick="document.getElementById('photoInput').click()">
+      📷 拍照或选择图片
+    </button>
+    <img class="photo-preview" id="photoPreview" alt="" style="max-height:220px;margin:12px auto 0;">
+    <input type="hidden" id="photoData" value="">
+    <div id="analyzeSection" style="display:none;margin-top:12px;">
+      <button class="btn btn-analyze" id="analyzeBtn" onclick="triggerAnalyze()">
+        🔍 识别食物
       </button>
-      <img class="photo-preview" id="photoPreview" alt="" style="max-height:220px;margin:12px auto 0;">
-      <input type="hidden" id="photoData" value="">
-
-      <div id="analyzeSection" style="display:none;margin-top:12px;">
-        <button class="btn btn-analyze" id="analyzeBtn" onclick="triggerAnalyze()">
-          🔍 识别食物
-        </button>
-        ${hasProxy ? '' : '<div style="font-size:0.72rem;color:#C87050;margin-top:6px;">⚠️ 请先在右上角 ⚙️ 设置 AI 代理地址</div>'}
-      </div>
-
-      <div id="analyzeResult"></div>
-      <button class="btn btn-outline" type="button" style="margin-top:10px;" onclick="showManualForm()">
-        手动填写
-      </button>
+      ${hasProxy ? '' : '<div style="font-size:0.72rem;color:#C87050;margin-top:6px;">⚠️ 请先在右上角 ⚙️ 设置 AI 代理地址</div>'}
     </div>
-
-    <!-- Editable form (hidden until analysis done or manual entry) -->
-    <div class="card" id="foodForm" style="display:${isEditing ? 'block' : 'none'};">
-      <div class="form-group">
-        <label>用餐日期</label>
-        <input type="date" id="entryDate" value="${selectedDate}" max="${todayStr()}">
-      </div>
-      <div class="form-group">
-        <label>食物名称</label>
-        <input type="text" id="foodName" placeholder="比如：红烧牛肉面" autocomplete="off">
-      </div>
-      <div class="form-group">
-        <label>份量</label>
-        <input type="text" id="foodAmount" placeholder="比如：一大碗 / 一份 / 两个">
-      </div>
-      <div class="form-group">
-        <label>热量 (kcal)</label>
-        <input type="number" id="foodCalories" placeholder="估算热量" style="width:100%;">
-      </div>
-      <div class="form-group">
-        <label>餐次</label>
-        <div class="meal-chips" id="mealChips"></div>
-        <input type="hidden" id="mealType" value="${defaultMeal}">
-      </div>
-      <div class="form-group">
-        <label>小备注</label>
-        <textarea id="foodNotes" placeholder="味道怎么样？和谁一起吃的？(◕‿◕)" rows="2"></textarea>
-      </div>
-      <button class="btn btn-primary" onclick="saveFood()">${isEditing ? '保存修改' : '✨ 记录下来'}</button>
-    </div>`;
-
-      // Render meal chips
-      const chips = document.getElementById('mealChips');
-      MEAL_TYPES.forEach(mt => {
-        const chip = document.createElement('span');
-        chip.className = 'meal-chip' + (mt.key === defaultMeal ? ' selected' : '');
-        chip.textContent = mt.label;
-        chip.onclick = () => {
-          document.querySelectorAll('.meal-chip').forEach(c => c.classList.remove('selected'));
-          chip.classList.add('selected');
-          document.getElementById('mealType').value = mt.key;
-        };
-        chips.appendChild(chip);
-      });
-
-      document.getElementById('photoInput').addEventListener('change', onPhotoSelected);
-
-      if (isEditing) {
-        document.getElementById('foodName').value = entry.food || '';
-        document.getElementById('foodAmount').value = entry.amount || '';
-        document.getElementById('foodCalories').value = entry.calories || '';
-        document.getElementById('foodNotes').value = entry.notes || '';
-        document.getElementById('photoData').value = entry.photo || '';
-        if (entry.photo) {
-          const preview = document.getElementById('photoPreview');
-          preview.src = entry.photo;
-          preview.classList.add('has-photo');
-          document.getElementById('photoIcon').style.display = 'none';
-        }
-      }
-    }
-
-    function showManualForm() {
-      const form = document.getElementById('foodForm');
-      form.style.display = 'block';
-      form.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function onPhotoSelected(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = ev => {
-        // Resize for storage
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const maxW = 600;
-          const scale = Math.min(1, maxW / img.width);
-          canvas.width = img.width * scale; canvas.height = img.height * scale;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
-          document.getElementById('photoData').value = dataUrl;
-          const preview = document.getElementById('photoPreview');
-          preview.src = dataUrl; preview.classList.add('has-photo');
-          document.getElementById('photoIcon').style.display = 'none';
-          document.getElementById('analyzeSection').style.display = 'block';
-        };
-        img.src = ev.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    async function triggerAnalyze() {
-      const btn = document.getElementById('analyzeBtn');
-      const resultDiv = document.getElementById('analyzeResult');
-      btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span> AI 正在识别中...';
-      resultDiv.innerHTML = '';
-
-      const imageData = document.getElementById('photoData').value;
-      const result = await analyzeFoodPhoto(imageData);
-
-      btn.disabled = false;
-      btn.innerHTML = '🔍 识别食物';
-
-      if (!result) {
-        // Show manual form anyway
-        document.getElementById('foodForm').style.display = 'block';
-        return;
-      }
-
-      pendingAnalysis = result;
-
-      // Show result card
-      resultDiv.innerHTML = `
-    <div class="result-card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span style="font-size:2rem;">${foodEmoji(result.food)}</span>
-        <div>
-          <div class="food-name">${result.food}</div>
-          <div class="detail">${result.amount} · 约 ${result.calories} kcal · ${MEAL_EMOJI[result.mealType] || ''}</div>
-        </div>
-      </div>
-      <div style="font-size:0.72rem;color:#8B9B8B;">🤖 AI 识别结果，可下方修改</div>
-    </div>`;
-
-      // Auto-fill form
-      document.getElementById('foodForm').style.display = 'block';
-      document.getElementById('foodName').value = result.food;
-      document.getElementById('foodAmount').value = result.amount;
-      document.getElementById('foodCalories').value = result.calories;
-      document.getElementById('mealType').value = result.mealType;
-      // Update meal chips
-      document.querySelectorAll('.meal-chip').forEach(c => {
-        c.classList.toggle('selected', c.textContent === MEAL_LABEL[result.mealType]);
-      });
-      document.getElementById('foodForm').scrollIntoView({ behavior: 'smooth' });
-    }
-
-
-    async function saveFood() {
-      const food = document.getElementById('foodName').value.trim();
-      if (!food) { showToast('请输入食物名称哦~ (｡•́︿•̀｡)'); return; }
-      const entryDate = document.getElementById('entryDate').value || todayStr();
-      if (entryDate > todayStr()) { showToast('还不能记录未来的饭哦~'); return; }
-
-      const calInput = parseInt(document.getElementById('foodCalories').value) || 0;
-      let cal = calInput > 0 ? calInput : estimateCalories(food);
-      if (!cal) cal = 200; // default
-
-      const entry = {
-        ...(editingEntry || {}),
-        date: entryDate,
-        time: editingEntry ? editingEntry.time : nowTime(),
-        mealType: document.getElementById('mealType').value,
-        food: food,
-        amount: document.getElementById('foodAmount').value.trim(),
-        calories: cal,
-        photo: document.getElementById('photoData').value,
-        notes: document.getElementById('foodNotes').value.trim(),
-        emoji: foodEmoji(food),
-      };
-      if (editingEntry) entry.updatedAt = new Date().toISOString();
-
-      if (editingEntry) {
-        await updateEntry(entry);
-        showToast('修改保存好啦~');
-      } else {
-        await addEntry(entry);
-        showToast('记录好啦！(๑´ڡ`๑) ♡');
-      }
-
-      editingEntry = null;
-      selectedDate = entryDate;
-      if (entryDate === todayStr()) {
-        navigateTo('today');
-      } else {
-        historyViewDate = entryDate;
-        navigateTo('calendar');
-      }
-    }
-
-    // ─────────────────────────────────────
-    // Calendar Page
-    // ─────────────────────────────────────
-    async function renderCalendar(main) {
-      document.getElementById('headerTitle').textContent = '📅 饮食日历';
-      document.getElementById('headerSub').textContent = formatDate(historyViewDate);
-
-      const viewDate = new Date(`${historyViewDate}T00:00:00`);
-      const year = viewDate.getFullYear();
-      const month = viewDate.getMonth();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const firstDow = new Date(year, month, 1).getDay();
-      const today = todayStr();
-
-      const dates = await getAllDates();
-      const dateSet = new Set(dates);
-
-      // Day labels
-      const dayLabels = ['日', '一', '二', '三', '四', '五', '六'];
-
-      let html = `<div style="text-align:center;margin-bottom:12px;">
-      <img src="assets/calendar_plan.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
+    <div id="analyzeResult"></div>
+    <button class="btn btn-outline" type="button" style="margin-top:10px;" onclick="showManualForm()">
+      手动填写
+    </button>
+  </div>
+  <!-- Editable form (hidden until analysis done or manual entry) -->
+  <div class="card" id="foodForm" style="display:${isEditing ? 'block' : 'none'};">
+    <div class="form-group">
+      <label>用餐日期</label>
+      <input type="date" id="entryDate" value="${selectedDate}" max="${todayStr()}">
     </div>
-    <div class="card">
+    <div class="form-group">
+      <label>食物名称</label>
+      <input type="text" id="foodName" placeholder="比如：红烧牛肉面" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>份量</label>
+      <input type="text" id="foodAmount" placeholder="比如：一大碗 / 一份 / 两个">
+    </div>
+    <div class="form-group">
+      <label>热量 (kcal)</label>
+      <input type="number" id="foodCalories" placeholder="估算热量" style="width:100%;">
+    </div>
+    <div class="form-group">
+      <label>餐次</label>
+      <div class="meal-chips" id="mealChips"></div>
+      <input type="hidden" id="mealType" value="${defaultMeal}">
+    </div>
+    <div class="form-group">
+      <label>小备注</label>
+      <textarea id="foodNotes" placeholder="味道怎么样？和谁一起吃的？(◕‿◕)" rows="2"></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="saveFood()">${isEditing ? '保存修改' : '✨ 记录下来'}</button>
+  </div>`;
+
+  // Render meal chips
+  const chips = document.getElementById('mealChips');
+  MEAL_TYPES.forEach(mt => {
+    const chip = document.createElement('span');
+    chip.className = 'meal-chip' + (mt.key === defaultMeal ? ' selected' : '');
+    chip.textContent = mt.label;
+    chip.onclick = () => {
+      document.querySelectorAll('.meal-chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      document.getElementById('mealType').value = mt.key;
+    };
+    chips.appendChild(chip);
+  });
+
+  document.getElementById('photoInput').addEventListener('change', onPhotoSelected);
+
+  if (isEditing) {
+    document.getElementById('foodName').value = entry.food || '';
+    document.getElementById('foodAmount').value = entry.amount || '';
+    document.getElementById('foodCalories').value = entry.calories || '';
+    document.getElementById('foodNotes').value = entry.notes || '';
+    document.getElementById('photoData').value = entry.photo || '';
+    if (entry.photo) {
+      const preview = document.getElementById('photoPreview');
+      preview.src = entry.photo;
+      preview.classList.add('has-photo');
+      document.getElementById('photoIcon').style.display = 'none';
+    }
+  }
+}
+
+function showManualForm() {
+  const form = document.getElementById('foodForm');
+  form.style.display = 'block';
+  form.scrollIntoView({ behavior: 'smooth' });
+}
+
+function onPhotoSelected(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    // Resize for storage
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 600;
+      const scale = Math.min(1, maxW / img.width);
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+      document.getElementById('photoData').value = dataUrl;
+      const preview = document.getElementById('photoPreview');
+      preview.src = dataUrl;
+      preview.classList.add('has-photo');
+      document.getElementById('photoIcon').style.display = 'none';
+      document.getElementById('analyzeSection').style.display = 'block';
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function triggerAnalyze() {
+  const btn = document.getElementById('analyzeBtn');
+  const resultDiv = document.getElementById('analyzeResult');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> AI 正在识别中...';
+  resultDiv.innerHTML = '';
+  const imageData = document.getElementById('photoData').value;
+  const result = await analyzeFoodPhoto(imageData);
+  btn.disabled = false;
+  btn.innerHTML = '🔍 识别食物';
+  if (!result) {
+    // Show manual form anyway
+    document.getElementById('foodForm').style.display = 'block';
+    return;
+  }
+  pendingAnalysis = result;
+  // Show result card
+  resultDiv.innerHTML = `
+  <div class="result-card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+      <span style="font-size:2rem;">${foodEmoji(result.food)}</span>
+      <div>
+        <div class="food-name">${result.food}</div>
+        <div class="detail">${result.amount} · 约 ${result.calories} kcal · ${MEAL_EMOJI[result.mealType] || ''}</div>
+      </div>
+    </div>
+    <div style="font-size:0.72rem;color:#8B9B8B;">🤖 AI 识别结果，可下方修改</div>
+  </div>`;
+  // Auto-fill form
+  document.getElementById('foodForm').style.display = 'block';
+  document.getElementById('foodName').value = result.food;
+  document.getElementById('foodAmount').value = result.amount;
+  document.getElementById('foodCalories').value = result.calories;
+  document.getElementById('mealType').value = result.mealType;
+  // Update meal chips
+  document.querySelectorAll('.meal-chip').forEach(c => {
+    c.classList.toggle('selected', c.textContent === MEAL_LABEL[result.mealType]);
+  });
+  document.getElementById('foodForm').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function saveFood() {
+  const food = document.getElementById('foodName').value.trim();
+  if (!food) {
+    showToast('请输入食物名称哦~ (｡•́︿•̀｡)');
+    return;
+  }
+  const entryDate = document.getElementById('entryDate').value || todayStr();
+  if (entryDate > todayStr()) {
+    showToast('还不能记录未来的饭哦~');
+    return;
+  }
+  const calInput = parseInt(document.getElementById('foodCalories').value) || 0;
+  let cal = calInput > 0 ? calInput : estimateCalories(food);
+  if (!cal) cal = 200; // default
+  const entry = {
+    ...(editingEntry || {}),
+    date: entryDate,
+    time: editingEntry ? editingEntry.time : nowTime(),
+    mealType: document.getElementById('mealType').value,
+    food: food,
+    amount: document.getElementById('foodAmount').value.trim(),
+    calories: cal,
+    photo: document.getElementById('photoData').value,
+    notes: document.getElementById('foodNotes').value.trim(),
+    emoji: foodEmoji(food),
+  };
+  if (editingEntry) entry.updatedAt = new Date().toISOString();
+  if (editingEntry) {
+    await updateEntry(entry);
+    showToast('修改保存好啦~');
+  } else {
+    await addEntry(entry);
+    showToast('记录好啦！(๑´ڡ`๑) ♡');
+  }
+  editingEntry = null;
+  selectedDate = entryDate;
+  if (entryDate === todayStr()) {
+    navigateTo('today');
+  } else {
+    historyViewDate = entryDate;
+    navigateTo('calendar');
+  }
+}
+
+// ─────────────────────────────────────
+// Calendar Page
+// ─────────────────────────────────────
+async function renderCalendar(main) {
+  document.getElementById('headerTitle').textContent = '📅 饮食日历';
+  document.getElementById('headerSub').textContent = formatDate(historyViewDate);
+  const viewDate = new Date(`${historyViewDate}T00:00:00`);
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDow = new Date(year, month, 1).getDay();
+  const today = todayStr();
+  const dates = await getAllDates();
+  const dateSet = new Set(dates);
+  // Day labels
+  const dayLabels = ['日', '一', '二', '三', '四', '五', '六'];
+  let html = `<div style="text-align:center;margin-bottom:12px;">
+    <img src="assets/calendar_plan.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
+  </div>
+  <div class="card">
     <div class="week-nav">
       <button class="arrow" onclick="changeCalendarMonth(-1)">‹</button>
       <div class="week-title">${year}年${month + 1}月</div>
       <button class="arrow" onclick="changeCalendarMonth(1)">›</button>
     </div>
     <div class="calendar-mini">`;
-
-      for (const dl of dayLabels) html += `<div class="day-label">${dl}</div>`;
-
-      for (let i = 0; i < firstDow; i++) html += '<div></div>';
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const ds = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        const cls = ['day-cell'];
-        if (ds === today) cls.push('today');
-        if (dateSet.has(ds)) cls.push('has-record');
-        if (ds === historyViewDate) cls.push('selected');
-        html += `<div class="${cls.join(' ')}" onclick="selectCalendarDate('${ds}')">${d}</div>`;
-      }
-      html += '</div></div>';
-
-      // History list for selected date
-      const entries = await getEntriesByDate(historyViewDate);
-      if (entries.length === 0) {
-        html += `<div class="empty-state"><img src="assets/empty_state.png" alt="" class="mascot-img" style="width:140px;height:140px;border-radius:16px;object-fit:cover;margin-bottom:12px;"><p>这天没有记录</p></div>`;
-      } else {
-        let dayCal = 0;
-        for (const e of entries) {
-          dayCal += e.calories || 0;
-          html += `
+  for (const dl of dayLabels) html += `<div class="day-label">${dl}</div>`;
+  for (let i = 0; i < firstDow; i++) html += '<div></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const ds = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const cls = ['day-cell'];
+    if (ds === today) cls.push('today');
+    if (dateSet.has(ds)) cls.push('has-record');
+    if (ds === historyViewDate) cls.push('selected');
+    html += `<div class="${cls.join(' ')}" onclick="selectCalendarDate('${ds}')">${d}</div>`;
+  }
+  html += '</div></div>';
+  // History list for selected date
+  const entries = await getEntriesByDate(historyViewDate);
+  if (entries.length === 0) {
+    html += `<div class="empty-state"><img src="assets/empty_state.png" alt="" class="mascot-img" style="width:140px;height:140px;border-radius:16px;object-fit:cover;margin-bottom:12px;"><p>这天没有记录</p></div>`;
+  } else {
+    let dayCal = 0;
+    for (const e of entries) {
+      dayCal += e.calories || 0;
+      html += `
       <div class="food-row" style="background:var(--card);box-shadow:var(--shadow);">
         <span class="emoji-big">${e.emoji || foodEmoji(e.food)}</span>
         <div class="info">
@@ -1654,179 +1502,171 @@
         <button onclick="editEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="编辑">✏️</button>
         <button onclick="removeEntry(${e.id})" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:4px;flex-shrink:0;" title="删除">🗑️</button>
       </div>`;
-        }
-        html += `<div style="text-align:center;padding:8px;color:var(--text-dim);font-size:0.8rem;">✨ 当日估算总计：${dayCal} kcal</div>`;
-      }
-
-      main.innerHTML = html;
     }
+    html += `<div style="text-align:center;padding:8px;color:var(--text-dim);font-size:0.8rem;">✨ 当日估算总计：${dayCal} kcal</div>`;
+  }
+  main.innerHTML = html;
+}
 
-    async function selectCalendarDate(ds) {
-      historyViewDate = ds;
-      await renderCalendar(document.getElementById('mainContent'));
-    }
+async function selectCalendarDate(ds) {
+  historyViewDate = ds;
+  await renderCalendar(document.getElementById('mainContent'));
+}
 
-    async function changeCalendarMonth(offset) {
-      const d = new Date(`${historyViewDate}T00:00:00`);
-      d.setMonth(d.getMonth() + offset, 1);
-      historyViewDate = dateInputValue(d);
-      await renderCalendar(document.getElementById('mainContent'));
-    }
+async function changeCalendarMonth(offset) {
+  const d = new Date(`${historyViewDate}T00:00:00`);
+  d.setMonth(d.getMonth() + offset, 1);
+  historyViewDate = dateInputValue(d);
+  await renderCalendar(document.getElementById('mainContent'));
+}
 
-    // ─────────────────────────────────────
-    // Stats Page
-    // ─────────────────────────────────────
-    async function renderStats(main) {
-      document.getElementById('headerTitle').textContent = '📊 美食周报';
-      document.getElementById('headerSub').textContent = '看看这周吃了什么~';
-
-      const today = new Date();
-      const monday = new Date(today);
-      monday.setDate(today.getDate() - today.getDay() + 1 + statsWeekOffset * 7);
-      const sunday = new Date(monday);
-      sunday.setDate(monday.getDate() + 6);
-
-      const start = dateInputValue(monday);
-      const end = dateInputValue(sunday);
-
-      const entries = await getRangeEntries(start, end);
-      const byDate = {}; const foodCount = {}; let totalCal = 0;
-      for (const e of entries) {
-        byDate[e.date] = byDate[e.date] || [];
-        byDate[e.date].push(e);
-        foodCount[e.food] = (foodCount[e.food] || 0) + 1;
-        totalCal += e.calories || 0;
-      }
-      const activeDays = Object.keys(byDate).length;
-      const topFoods = Object.entries(foodCount).sort((a, b) => b[1] - a[1]).slice(0, 3);
-      const avgCal = activeDays > 0 ? Math.round(totalCal / activeDays) : 0;
-
-      // Week nav
-      let html = `<div style="text-align:center;margin-bottom:12px;">
-      <img src="assets/stats_report.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
-    </div>
-    <div class="card">
+// ─────────────────────────────────────
+// Stats Page
+// ─────────────────────────────────────
+async function renderStats(main) {
+  document.getElementById('headerTitle').textContent = '📊 美食周报';
+  document.getElementById('headerSub').textContent = '看看这周吃了什么~';
+  const today = new Date();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - today.getDay() + 1 + statsWeekOffset * 7);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  const start = dateInputValue(monday);
+  const end = dateInputValue(sunday);
+  const entries = await getRangeEntries(start, end);
+  const byDate = {};
+  const foodCount = {};
+  let totalCal = 0;
+  for (const e of entries) {
+    byDate[e.date] = byDate[e.date] || [];
+    byDate[e.date].push(e);
+    foodCount[e.food] = (foodCount[e.food] || 0) + 1;
+    totalCal += e.calories || 0;
+  }
+  const activeDays = Object.keys(byDate).length;
+  const topFoods = Object.entries(foodCount).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const avgCal = activeDays > 0 ? Math.round(totalCal / activeDays) : 0;
+  // Week nav
+  let html = `<div style="text-align:center;margin-bottom:12px;">
+    <img src="assets/stats_report.png" alt="" class="mascot-img" style="width:120px;height:120px;border-radius:16px;object-fit:cover;">
+  </div>
+  <div class="card">
     <div class="week-nav">
       <button class="arrow" onclick="changeWeek(-1)">◀</button>
       <span class="week-title">${start} ~ ${end}</span>
       <button class="arrow" onclick="changeWeek(1)">▶</button>
     </div>
   </div>`;
-
-      html += `<div class="stat-cards">
+  html += `<div class="stat-cards">
     <div class="stat-card pink"><div class="big">${activeDays}</div><div class="lbl">记录天数</div></div>
     <div class="stat-card purple"><div class="big">${entries.length}</div><div class="lbl">总餐次</div></div>
     <div class="stat-card mint"><div class="big">${avgCal}</div><div class="lbl">日均热量/kcal</div></div>
     <div class="stat-card yellow"><div class="big">${totalCal}</div><div class="lbl">周总热量/kcal</div></div>
   </div>`;
-
-      html += `<div class="card">
+  html += `<div class="card">
     <div style="font-weight:700;margin-bottom:10px;">📤 导出数据</div>
     <div class="export-actions">
       <button class="btn btn-outline" type="button" onclick="exportDiary('csv')">CSV 表格</button>
       <button class="btn btn-primary" type="button" onclick="exportDiary('json')">JSON 备份</button>
     </div>
   </div>`;
-
-      // Daily breakdown
-      html += `<div class="card"><div style="font-weight:700;margin-bottom:8px;">📋 每日明细</div>`;
-      for (let d = new Date(monday); d <= sunday; d.setDate(d.getDate() + 1)) {
-        const ds = dateInputValue(d);
-        const dayEntries = byDate[ds] || [];
-        const dayCal = dayEntries.reduce((s, e) => s + (e.calories || 0), 0);
-        const dayLabel = ['日', '一', '二', '三', '四', '五', '六'][d.getDay()];
-        const indicator = dayEntries.length === 0 ? '🫥' : dayCal > 2000 ? '😋' : dayCal > 1000 ? '😊' : '🫣';
-        html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F8F0E8;">
+  // Daily breakdown
+  html += `<div class="card"><div style="font-weight:700;margin-bottom:8px;">📋 每日明细</div>`;
+  for (let d = new Date(monday); d <= sunday; d.setDate(d.getDate() + 1)) {
+    const ds = dateInputValue(d);
+    const dayEntries = byDate[ds] || [];
+    const dayCal = dayEntries.reduce((s, e) => s + (e.calories || 0), 0);
+    const dayLabel = ['日', '一', '二', '三', '四', '五', '六'][d.getDay()];
+    const indicator = dayEntries.length === 0 ? '🫥' : dayCal > 2000 ? '😋' : dayCal > 1000 ? '😊' : '🫣';
+    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F8F0E8;">
       <span>${ds} 周${dayLabel}</span>
       <span>${indicator} ${dayEntries.length}餐 · ${dayCal} kcal</span>
     </div>`;
-      }
-      html += '</div>';
-
-      // Top foods
-      if (topFoods.length > 0) {
-        html += `<div class="card"><div style="font-weight:700;margin-bottom:8px;">🏆 本周最爱</div>`;
-        const ranks = ['gold', 'silver', 'bronze'];
-        topFoods.forEach(([food, count], i) => {
-          const maxCount = topFoods[0][1];
-          const pct = Math.round(count / maxCount * 100);
-          html += `<div class="top-food">
+  }
+  html += '</div>';
+  // Top foods
+  if (topFoods.length > 0) {
+    html += `<div class="card"><div style="font-weight:700;margin-bottom:8px;">🏆 本周最爱</div>`;
+    const ranks = ['gold', 'silver', 'bronze'];
+    topFoods.forEach(([food, count], i) => {
+      const maxCount = topFoods[0][1];
+      const pct = Math.round(count / maxCount * 100);
+      html += `<div class="top-food">
         <div class="rank ${ranks[i] || ''}">${i + 1}</div>
         <span style="font-size:0.85rem;width:60px;">${food}</span>
         <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%">${count}次</div></div>
       </div>`;
-        });
-        html += '</div>';
-      }
+    });
+    html += '</div>';
+  }
+  html += `<div style="text-align:center;padding:12px;color:var(--text-dim);font-size:0.75rem;">✨ 营养数据为粗略估算，仅供参考哦~</div>`;
+  main.innerHTML = html;
+}
 
-      html += `<div style="text-align:center;padding:12px;color:var(--text-dim);font-size:0.75rem;">✨ 营养数据为粗略估算，仅供参考哦~</div>`;
+async function exportDiary(format) {
+  const entries = sortedEntries(await getAllEntries());
+  if (entries.length === 0) {
+    showToast('还没有可导出的记录~');
+    return;
+  }
+  const stamp = todayStr();
+  if (format === 'json') {
+    const data = {
+      app: 'food-diary',
+      exportedAt: new Date().toISOString(),
+      count: entries.length,
+      entries,
+    };
+    downloadFile(`food-diary-${stamp}.json`, JSON.stringify(data, null, 2), 'application/json;charset=utf-8');
+    showToast('JSON 备份已导出~');
+    return;
+  }
+  const headers = ['日期', '餐次', '食物', '份量', '热量(kcal)', '备注', '记录时间', '有照片', 'ID'];
+  const rows = entries.map(e => [
+    e.date || '',
+    MEAL_LABEL[e.mealType] || e.mealType || '',
+    e.food || '',
+    e.amount || '',
+    e.calories || '',
+    e.notes || '',
+    e.time || '',
+    e.photo ? '是' : '否',
+    e.id || '',
+  ]);
+  const csv = '\uFEFF' + [headers, ...rows].map(row => row.map(csvCell).join(',')).join('\r\n');
+  downloadFile(`food-diary-${stamp}.csv`, csv, 'text/csv;charset=utf-8');
+  showToast('CSV 表格已导出~');
+}
 
-      main.innerHTML = html;
+function changeWeek(dir) {
+  statsWeekOffset += dir;
+  renderPage('stats');
+}
+
+// ─────────────────────────────────────
+// Init
+// ─────────────────────────────────────
+(async function init() {
+  // Register service worker
+  if ('serviceWorker' in navigator) {
+    try {
+      await navigator.serviceWorker.register('food-diary-sw.js');
+    } catch (e) {
+      /* ok without SW */
     }
+  }
+  renderPage('today');
+})();
 
-    async function exportDiary(format) {
-      const entries = sortedEntries(await getAllEntries());
-      if (entries.length === 0) {
-        showToast('还没有可导出的记录~');
-        return;
-      }
-
-      const stamp = todayStr();
-      if (format === 'json') {
-        const data = {
-          app: 'food-diary',
-          exportedAt: new Date().toISOString(),
-          count: entries.length,
-          entries,
-        };
-        downloadFile(`food-diary-${stamp}.json`, JSON.stringify(data, null, 2), 'application/json;charset=utf-8');
-        showToast('JSON 备份已导出~');
-        return;
-      }
-
-      const headers = ['日期', '餐次', '食物', '份量', '热量(kcal)', '备注', '记录时间', '有照片', 'ID'];
-      const rows = entries.map(e => [
-        e.date || '',
-        MEAL_LABEL[e.mealType] || e.mealType || '',
-        e.food || '',
-        e.amount || '',
-        e.calories || '',
-        e.notes || '',
-        e.time || '',
-        e.photo ? '是' : '否',
-        e.id || '',
-      ]);
-      const csv = '\uFEFF' + [headers, ...rows].map(row => row.map(csvCell).join(',')).join('\r\n');
-      downloadFile(`food-diary-${stamp}.csv`, csv, 'text/csv;charset=utf-8');
-      showToast('CSV 表格已导出~');
-    }
-
-    function changeWeek(dir) {
-      statsWeekOffset += dir;
-      renderPage('stats');
-    }
-
-    // ─────────────────────────────────────
-    // Init
-    // ─────────────────────────────────────
-    (async function init() {
-      // Register service worker
-      if ('serviceWorker' in navigator) {
-        try {
-          await navigator.serviceWorker.register('food-diary-sw.js');
-        } catch (e) { /* ok without SW */ }
-      }
-      renderPage('today');
-    })();
-    // ====================== 新增：每日目标热量模块 ======================
+// ====================== 新增：每日目标热量模块 ======================
 const TARGET_CAL_LOCAL_KEY = "foodDiaryTargetCal";
-
 // 获取保存的目标热量
 function getTargetCal() {
   const saved = localStorage.getItem(TARGET_CAL_LOCAL_KEY);
   const num = Number(saved);
   return Number.isFinite(num) && num >= 500 ? num : 1800;
 }
+
 // 保存目标热量
 function saveTargetCal() {
   const inputEl = document.getElementById("targetCalInput");
@@ -1903,8 +1743,7 @@ saveFood = async function(){
   await oldSaveFood();
   renderTargetCalSummary();
 }
-
-  </script>
+</script>
 </body>
-
 </html>
+
